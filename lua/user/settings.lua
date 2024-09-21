@@ -57,7 +57,7 @@ settings["treesitter_deps"] = {
 	"html",
 	"javascript",
 	"json",
-	-- "latex",
+	"latex",
 	"lua",
 	"make",
 	"markdown",
@@ -69,6 +69,8 @@ settings["treesitter_deps"] = {
 	"vue",
 	"yaml",
 	"ini",
+	"r",
+	"rnoweb",
 }
 
 return settings

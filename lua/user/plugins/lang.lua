@@ -29,4 +29,8 @@ lang["benlubas/molten-nvim"] = {
 	end,
 }
 
+lang["R-nvim/R.nvim"] = {
+	lazy = false,
+}
+
 return lang
