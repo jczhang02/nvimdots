@@ -12,6 +12,7 @@ settings["server_formatting_block_list"] = {
 	clangd = true,
 	texlab = true,
 	pyright = true,
+	basepyright = true,
 }
 
 settings["null_ls_deps"] = {

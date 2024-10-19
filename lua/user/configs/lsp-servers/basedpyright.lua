@@ -3,19 +3,19 @@ return {
 	filetypes = { "python" },
 	settings = {
 		basedpyright = {
-			pythonPath = vim.fn.exepath("python"),
+			-- pythonPath = vim.fn.exepath("python"),
 			analysis = {
 				autoImportCompletions = true,
 				autoSearchPaths = true,
 				diagnosticMode = "workspace", -- openFilesOnly, workspace
-				typeCheckingMode = "basic", -- off, basic, strict
+				typeCheckingMode = "standard",
 				useLibraryCodeForTypes = true,
 				diagnosticSeverityOverrides = {
 					reportGeneralTypeIssues = "none",
 					reportUnboundVariable = false,
 					strictParameterNoneValue = false,
 				},
-				-- stubPath = vim.fn.stdpath("data") .. "/site/lazy/python-type-stubs",
+				stubPath = vim.fn.stdpath("data") .. "/site/lazy/python-type-stubs",
 				inlayHints = {
 					functionReturnTypes = true,
 					pytestParameters = true,
