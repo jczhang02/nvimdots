@@ -34,6 +34,7 @@ return function()
 				"sh",
 				"markdown",
 			},
+			extra_filetypes = { "toml" },
 		}),
 	}
 	require("modules.utils").load_plugin("null-ls", {

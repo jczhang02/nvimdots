@@ -14,13 +14,11 @@ return {
 				diagnosticMode = "workspace", -- openFilesOnly, workspace
 				typeCheckingMode = "basic", -- off, basic, strict
 				useLibraryCodeForTypes = true,
-				extraPaths = {
-					"src",
-				},
+				extraPaths = {},
 				diagnosticSeverityOverrides = {
-					reportGeneralTypeIssues = "none",
-					reportUnboundVariable = false,
-					strictParameterNoneValue = false,
+					-- reportGeneralTypeIssues = "none",
+					-- reportUnboundVariable = false,
+					-- strictParameterNoneValue = false,
 				},
 				stubPath = vim.fn.stdpath("data") .. "/site/lazy/python-type-stubs",
 				inlayHints = {
