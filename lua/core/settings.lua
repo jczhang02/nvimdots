@@ -223,4 +223,3 @@ settings["dashboard_image"] = {
 }
 
 return require("modules.utils").extend_config(settings, "user.settings")
-

@@ -1,6 +1,6 @@
 return function()
 	require("luasnip-latex-snippets").setup({
-		use_treesitter = true,
+		use_treesitter = false,
 		allow_on_markdown = true,
 	})
 end

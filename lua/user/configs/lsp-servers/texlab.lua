@@ -2,8 +2,8 @@ return {
 	settings = {
 		texlab = {
 			inlayHints = {
-				labelDefinitions = true,
-				labelReferences = true,
+				labelDefinitions = false,
+				labelReferences = false,
 			},
 		},
 	},
