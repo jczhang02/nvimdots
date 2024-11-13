@@ -32,6 +32,7 @@ tool["nvim-neo-tree/neo-tree.nvim"] = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 		"MunifTanjim/nui.nvim",
+		"saifulapm/neotree-file-nesting-config",
 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
 	config = require("configs.tool.neo-tree"),
@@ -146,6 +147,7 @@ tool["yetone/avante.nvim"] = {
 	-- cmd = { "AvanteAsk" },
 	opts = {
 		provider = "openai",
+		hints = { enabled = false },
 		auto_suggestions_provider = "openai",
 		openai = {
 			endpoint = "https://api.302.ai/v1/chat/completions",
