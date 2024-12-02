@@ -20,5 +20,6 @@ return {
 		require("user.configs.formatters.bibtex-tidy"),
 		require("user.configs.formatters.xmlformat"),
 		require("user.configs.formatters.beautysh"),
+		require("none-ls.formatting.ruff_format"),
 	},
 }

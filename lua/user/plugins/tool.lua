@@ -213,4 +213,8 @@ tool["yetone/avante.nvim"] = {
 	},
 }
 
+tool["nvimtools/none-ls-extras.nvim"] = {
+	lazy = true,
+}
+
 return tool

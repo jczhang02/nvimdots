@@ -13,6 +13,7 @@ settings["server_formatting_block_list"] = {
 	texlab = true,
 	pyright = true,
 	basepyright = true,
+	ruff = true,
 }
 
 settings["null_ls_deps"] = {
@@ -32,7 +33,6 @@ settings["lsp_deps"] = function(defaults)
 		"html",
 		"jsonls",
 		"lua_ls",
-		-- "pylsp",
 	}
 end
 
