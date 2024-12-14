@@ -12,6 +12,13 @@ vim.api.nvim_create_user_command("FormatToggle", function()
 	M.toggle_format_on_save()
 end, {})
 
+vim.api.nvim_create_user_command("Format", function()
+	M.format({
+		timeout = format_timeout,
+		filter = M.format_filter,
+	})
+end, {})
+
 local block_list = settings.formatter_block_list
 vim.api.nvim_create_user_command("FormatterToggleFt", function(opts)
 	if block_list[opts.args] == nil then
@@ -118,7 +125,7 @@ function M.format(opts)
 	end
 
 	local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
-	local clients = vim.lsp.get_clients({ buffer = bufnr })
+	local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
 	if opts.filter then
 		clients = opts.filter(clients)
