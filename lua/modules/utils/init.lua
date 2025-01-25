@@ -29,7 +29,7 @@ local M = {}
 ---@field crust string
 ---@field none "NONE"
 
----@type nil|table
+---@type nil|palette
 local palette = nil
 
 -- Indicates if autocmd for refreshing the builtin palette has already been registered
@@ -56,43 +56,38 @@ local function init_palette()
 		})
 	end
 
-	local fallback_palette = {
-		rosewater = "#DC8A78",
-		flamingo = "#DD7878",
-		mauve = "#CBA6F7",
-		pink = "#F5C2E7",
-		red = "#E95678",
-		maroon = "#B33076",
-		peach = "#FF8700",
-		yellow = "#F7BB3B",
-		green = "#AFD700",
-		sapphire = "#36D0E0",
-		blue = "#61AFEF",
-		sky = "#04A5E5",
-		teal = "#B5E8E0",
-		lavender = "#7287FD",
-
-		text = "#F2F2BF",
-		subtext1 = "#BAC2DE",
-		subtext0 = "#A6ADC8",
-		overlay2 = "#C3BAC6",
-		overlay1 = "#988BA2",
-		overlay0 = "#6E6B6B",
-		surface2 = "#6E6C7E",
-		surface1 = "#575268",
-		surface0 = "#302D41",
-
-		base = "#1D1536",
-		mantle = "#1C1C19",
-		crust = "#161320",
-	}
-
 	if not palette then
-		if vim.g.colors_name == nil or (vim.g.colors_name ~= nil and not vim.g.colors_name:find("catppuccin")) then
-			palette = fallback_palette
-		else
-			palette = require("catppuccin.palettes").get_palette()
-		end
+		palette = (vim.g.colors_name or ""):find("catppuccin") and require("catppuccin.palettes").get_palette()
+			or {
+				rosewater = "#DC8A78",
+				flamingo = "#DD7878",
+				mauve = "#CBA6F7",
+				pink = "#F5C2E7",
+				red = "#E95678",
+				maroon = "#B33076",
+				peach = "#FF8700",
+				yellow = "#F7BB3B",
+				green = "#AFD700",
+				sapphire = "#36D0E0",
+				blue = "#61AFEF",
+				sky = "#04A5E5",
+				teal = "#B5E8E0",
+				lavender = "#7287FD",
+
+				text = "#F2F2BF",
+				subtext1 = "#BAC2DE",
+				subtext0 = "#A6ADC8",
+				overlay2 = "#C3BAC6",
+				overlay1 = "#988BA2",
+				overlay0 = "#6E6B6B",
+				surface2 = "#6E6C7E",
+				surface1 = "#575268",
+				surface0 = "#302D41",
+
+				base = "#1D1536",
+				mantle = "#1C1C19",
+				crust = "#161320",
+			}
 
 		palette = vim.tbl_extend("force", { none = "NONE" }, palette, require("core.settings").palette_overwrite)
 	end
@@ -297,7 +292,8 @@ end
 ---@param opts nil|table @The default config to be merged with
 ---@param vim_plugin? boolean @If this plugin is written in vimscript or not
 ---@param setup_callback? function @Add new callback if the plugin needs unusual setup function
-function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
+---@param overwrite? boolean @If load user table-type config by overwriting
+function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback, overwrite)
 	vim_plugin = vim_plugin or false
 
 	-- Get the file name of the default config
@@ -330,7 +326,11 @@ function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
 			if ok then
 				-- Extend base config if the returned user config is a table
 				if type(user_config) == "table" then
-					opts = tbl_recursive_merge(opts, user_config)
+					if overwrite == true then
+						opts = vim.tbl_deep_extend("force", opts, user_config)
+					else
+						opts = tbl_recursive_merge(opts, user_config)
+					end
 					setup_callback(opts)
 				-- Replace base config if the returned user config is a function
 				elseif type(user_config) == "function" then

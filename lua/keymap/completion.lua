@@ -1,28 +1,32 @@
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
-local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 
-local plug_map = {
-	["n|<A-f>"] = map_cmd("<Cmd>FormatToggle<CR>"):with_noremap():with_desc("formatter: Toggle format on save"),
-	["n|<A-S-f>"] = map_cmd("<Cmd>Format<CR>"):with_noremap():with_desc("formatter: Format buffer manually"),
+local mappings = {
+	fmt = {
+		["n|<A-f>"] = map_cr("FormatToggle"):with_noremap():with_silent():with_desc("formatter: Toggle format on save"),
+		["n|<A-S-f>"] = map_cr("Format"):with_noremap():with_silent():with_desc("formatter: Format buffer manually"),
+	},
 }
-bind.nvim_load_mapping(plug_map)
+bind.nvim_load_mapping(mappings.fmt)
 
-local mapping = {}
+--- The following code allows this file to be exported ---
+---    for use with LSP lazy-loaded keymap bindings    ---
 
-function mapping.lsp(buf)
+local M = {}
+
+---@param buf integer
+function M.lsp(buf)
 	local map = {
 		-- LSP-related keymaps, ONLY effective in buffers with LSP(s) attached
 		["n|<leader>li"] = map_cr("LspInfo"):with_silent():with_buffer(buf):with_desc("lsp: Info"),
 		["n|<leader>lr"] = map_cr("LspRestart"):with_silent():with_buffer(buf):with_nowait():with_desc("lsp: Restart"),
-		["n|go"] = map_cr("AerialToggle!"):with_silent():with_buffer(buf):with_desc("lsp: Toggle outline"),
-		["n|gto"] = map_callback(function()
-				require("telescope").extensions.aerial.aerial()
+		["n|go"] = map_callback(function()
+				require("edgy").toggle("right")
 			end)
 			:with_silent()
 			:with_buffer(buf)
-			:with_desc("lsp: Toggle outline in Telescope"),
+			:with_desc("lsp: Toggle outline"),
 		["n|g["] = map_cr("Lspsaga diagnostic_jump_prev")
 			:with_silent()
 			:with_buffer(buf)
@@ -63,18 +67,6 @@ function mapping.lsp(buf)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Show outgoing calls"),
-		["n|<leader>td"] = map_callback(function()
-				_toggle_diagnostic()
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("edit: Toggle virtual text display of current buffer"),
-		["n|<leader>th"] = map_callback(function()
-				_toggle_inlayhint()
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("edit: Toggle inlay hints dispaly of current buffer"),
 	}
 	bind.nvim_load_mapping(map)
 
@@ -84,4 +76,4 @@ function mapping.lsp(buf)
 	end
 end
 
-return mapping
+return M
