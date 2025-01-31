@@ -5,7 +5,7 @@ return {
 	sources = {
 		btns.formatting.clang_format.with({
 			filetypes = { "c", "cpp" },
-			extra_args = { "-style={BasedOnStyle: LLVM, IndentWidth: 2}" },
+			extra_args = { "-style={BasedOnStyle: LLVM, IndentWidth: 4}" },
 		}),
 		-- btns.formatting.black.with({
 		-- 	extra_args = { "--line-length=80", "--experimental-string-processing" },

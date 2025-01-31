@@ -105,6 +105,12 @@ autosnips = {
 		{ t("\\mathbf{"), i(1), t("}") },
 		{ condition = M.in_mathzone, show_condition = M.in_text }
 	),
+
+	s(
+		{ trig = "vv", name = "v-th view", dscr = "Insert v-th view." },
+		{ t("^{(v)}"), i(1), t("") },
+		{ condition = M.in_text, show_condition = M.in_text }
+	),
 }
 
 return snips, autosnips

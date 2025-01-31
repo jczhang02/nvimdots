@@ -3,6 +3,7 @@ local definitions = {
 	bufs = {
 		{ "BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile" },
 		{ "FileType", "markdown,tex,bib", "set wrap" },
+		-- { "FileType", "c,cpp", "setl ts=2 sts=2 sw=2" },
 	},
 }
 
