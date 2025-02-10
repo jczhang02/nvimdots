@@ -141,78 +141,6 @@ tool["nvimdev/template.nvim"] = {
 	end,
 }
 
-tool["yetone/avante.nvim"] = {
-	lazy = true,
-	event = "VeryLazy",
-	-- cmd = { "AvanteAsk" },
-	opts = {
-		provider = "openai",
-		hints = { enabled = false },
-		auto_suggestions_provider = "openai",
-		openai = {
-			endpoint = "https://api.302.ai/v1/chat/completions",
-			-- model = 'claude-3-5-sonnet-20240620',
-			-- model = "gpt-4o",
-
-			model = "gpt-3.5-sonnet-cursor",
-			-- model = "o1-preview",
-			-- timeout = 120000,
-		},
-		claude = {
-			endpoint = "https://api.302.ai/v1/chat/completions",
-			model = "gpt-3.5-sonnet-cursor",
-			timeout = 30000, -- Timeout in milliseconds
-			temperature = 0,
-			max_tokens = 8000,
-		},
-		behaviour = {
-			auto_suggestions = false,
-			minimize_diff = true,
-		},
-		windows = {
-			position = "smart",
-			height = 46,
-			wrap = true,
-			sidebar_header = {
-				align = "center",
-			},
-			ask = {
-				floating = false,
-			},
-		},
-	},
-	version = false,
-	build = "make",
-	dependencies = {
-		"stevearc/dressing.nvim",
-		{
-			-- support for image pasting
-			"HakonHarnes/img-clip.nvim",
-			event = "VeryLazy",
-			opts = {
-				-- recommended settings
-				default = {
-					embed_image_as_base64 = false,
-					prompt_for_file_name = false,
-					drag_and_drop = {
-						insert_mode = true,
-					},
-					-- required for Windows users
-					use_absolute_path = true,
-				},
-			},
-		},
-		{
-			-- Make sure to set this up properly if you have lazy=true
-			"MeanderingProgrammer/render-markdown.nvim",
-			opts = {
-				file_types = { "markdown", "Avante" },
-			},
-			ft = { "markdown", "Avante" },
-		},
-	},
-}
-
 tool["nvimtools/none-ls-extras.nvim"] = {
 	lazy = true,
 }
@@ -358,6 +286,14 @@ tool["Civitasv/cmake-tools.nvim"] = {
 			cmake_virtual_text_support = true, -- Show the target related to current file using virtual text (at right corner)
 		})
 	end,
+}
+
+tool["olimorris/codecompanion.nvim"] = {
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"nvim-treesitter/nvim-treesitter",
+	},
+	opts = require("configs.tool.codecompanion"),
 }
 
 return tool
