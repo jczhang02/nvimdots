@@ -288,15 +288,4 @@ tool["Civitasv/cmake-tools.nvim"] = {
 	end,
 }
 
-tool["olimorris/codecompanion.nvim"] = {
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"nvim-treesitter/nvim-treesitter",
-	},
-	opts = require("configs.tool.codecompanion"),
-	init = function()
-		require("configs.tool.spinner"):init()
-	end
-}
-
 return tool

@@ -32,9 +32,6 @@ return function()
 	local use_copilot = require("core.settings").use_copilot
 	local comparators = use_copilot == true
 			and {
-				require("copilot_cmp.comparators").prioritize,
-				require("copilot_cmp.comparators").score,
-				-- require("cmp_tabnine.compare"),
 				compare.offset, -- Items closer to cursor will have lower priority
 				compare.exact,
 				-- compare.scopes,
@@ -91,7 +88,7 @@ return function()
 					string.format(" %s  %s", lspkind_icons[vim_item.kind] or icons.cmp.undefined, vim_item.kind or "")
 
 				vim_item.menu = setmetatable({
-					cmp_tabnine = "[TN]",
+					codecompanion = "[CC]",
 					copilot = "[CPLT]",
 					buffer = "[BUF]",
 					orgmode = "[ORG]",
@@ -185,11 +182,9 @@ return function()
 					end,
 				},
 			},
-			-- { name = "latex_symbols" },
-
-			{ name = "copilot" },
-			-- { name = "codeium" },
-			-- { name = "cmp_tabnine" },
+			{
+				name = "codecompanion",
+			},
 		},
 		experimental = {
 			ghost_text = {
