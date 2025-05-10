@@ -60,53 +60,9 @@ tool["keaising/im-select.nvim"] = {
 	config = require("configs.tool.im-select"),
 }
 
-tool["folke/zen-mode.nvim"] = {
-	lazy = false,
-}
-
-tool["CoatiSoftware/vim-sourcetrail"] = {
-	lazy = true,
-	cmd = {
-		"SourcetrailStartServer",
-		"SourcetrailRestartServer",
-		"SourcetrailStopServer",
-	},
-	config = function()
-		vim.g.sourcetrail_ip = "127.0.0.1"
-		vim.g.sourcetrail_to_vim_port = 16678
-		vim.g.vim_to_sourcetrail_port = 16677
-	end,
-}
-
-tool["rareitems/printer.nvim"] = {
-	config = function()
-		require("printer").setup({
-			keymap = "gm", -- Plugin doesn't have any keymaps by default
-		})
-	end,
-}
-
 tool["windwp/nvim-autopairs"] = {
 	event = "InsertEnter",
 	config = require("user.configs.tool.autopairs"),
-}
-
-tool["kwkarlwang/bufresize.nvim"] = {
-	event = { "BufWinEnter", "WinEnter" },
-	config = function()
-		require("bufresize").setup({
-			register = {
-				trigger_events = { "BufWinEnter", "WinEnter" },
-				keys = {},
-			},
-			resize = {
-				trigger_events = {
-					"VimResized",
-				},
-				increment = 1,
-			},
-		})
-	end,
 }
 
 tool["TobinPalmer/pastify.nvim"] = {

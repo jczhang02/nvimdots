@@ -19,4 +19,8 @@ editor["kylechui/nvim-surround"] = {
 	config = require("configs.editor.nvim-surround"),
 }
 
+editor["hiphish/rainbow-delimiters.nvim"] = {
+	submodules = false,
+}
+
 return editor
