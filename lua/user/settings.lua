@@ -37,10 +37,8 @@ settings["lsp_deps"] = function(defaults)
 end
 
 settings["disabled_plugins"] = {
-	"nvim-tree/nvim-tree.lua",
-	-- "akinsho/bufferline.nvim",
-	"m4xshen/autoclose.nvim",
-	-- "zbirenbaum/neodim",
+	-- "nvim-tree/nvim-tree.lua",
+	-- "m4xshen/autoclose.nvim",
 }
 
 settings["gui_config"] = {

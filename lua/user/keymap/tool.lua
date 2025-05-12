@@ -5,10 +5,10 @@ local map_callback = bind.map_callback
 local map_cu = bind.map_cu
 
 return {
-	["n|<C-n>"] = "",
-	["n|<C-n>"] = map_cr("Neotree toggle"):with_noremap():with_silent():with_desc("filetree: Toggle"),
-	["n|<C-S-n>"] = "",
-	["n|<C-S-n>"] = map_cr("Neotree focus"):with_noremap():with_silent():with_desc("filetree: Toggle"),
+	-- ["n|<C-n>"] = "",
+	-- ["n|<C-n>"] = map_cr("Neotree toggle"):with_noremap():with_silent():with_desc("filetree: Toggle"),
+	-- ["n|<C-S-n>"] = "",
+	-- ["n|<C-S-n>"] = map_cr("Neotree focus"):with_noremap():with_silent():with_desc("filetree: Toggle"),
 	["n|<leader>nf"] = "",
 	["n|<leader>nr"] = "",
 	["n|<leader>hpb"] = map_callback(function()
