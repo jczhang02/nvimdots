@@ -1,105 +1,61 @@
----@diagnostic disable: lowercase-global
-
 return function()
-	local openrouter_key = os.getenv("OPENROUTER_KEY")
-	local oaipro_key = os.getenv("OAIPRO_KEY")
-	local siliconflow_key = os.getenv("SILICONFLOW_KEY")
+	local secret_key = os.getenv("CODE_COMPANION_KEY")
+	local models = require("core.settings").chat_models
+	local default_model = models[1]
+	local current_model = default_model
 
-	-- local available_models = {
-	-- 	openrouter = {
-	-- 		"google/gemini-2.0-flash-001",
-	-- 		"google/gemini-2.5-pro-preview-03-25",
-	-- 		"anthropic/claude-3.7-sonnet",
-	-- 		"anthropic/claude-3.5-sonnet",
-	-- 		"openai/gpt-4o-mini",
-	-- 	},
-	-- 	oaipro = {
-	-- 		"gpt-4o",
-	-- 		"claude-3-5-sonnet-20240620",
-	-- 	},
-	-- 	siliconflow = {
-	-- 		"deepseek-ai/DeepSeek-R1",
-	-- 		"deepseek-ai/DeepSeek-V3",
-	-- 	},
-	-- }
+	local select_model = function()
+		local actions = require("telescope.actions")
+		local action_state = require("telescope.actions.state")
+		local finder = require("telescope.finders")
+		local pickers = require("telescope.pickers")
+		local type = require("telescope.themes").get_dropdown()
+		local conf = require("telescope.config").values
 
-	local current_adapter = "oaipro" -- openrouter, oaipro, siliconflow
-	default_model = "google/gemini-2.5-pro-preview"
-	current_model = default_model
-	local available_models = {
-		"google/gemini-2.5-pro-preview",
-		"google/gemini-2.0-flash-001",
-		"anthropic/claude-3.7-sonnet",
-		"anthropic/claude-3.5-sonnet",
-		"openai/gpt-4o-mini",
-		"openai/gpt-4o",
-	}
+		pickers
+			.new(type, {
+				prompt_title = "(CodeCompanion) Select Model",
+				finder = finder.new_table({ results = models }),
+				sorter = conf.generic_sorter(type),
+				attach_mappings = function(bufnr)
+					actions.select_default:replace(function()
+						actions.close(bufnr)
+						current_model = action_state.get_selected_entry()[1]
+						vim.notify(
+							"Model selected: " .. current_model,
+							vim.log.levels.INFO,
+							{ title = "CodeCompanion" }
+						)
+					end)
+
+					return true
+				end,
+			})
+			:find()
+	end
 
 	require("configs.spinner"):init()
+
 	require("codecompanion").setup({
+		strategies = {
+			chat = {
+				adapter = "openrouter",
+			},
+			inline = {
+				adapter = "openrouter",
+			},
+		},
 		adapters = {
 			openrouter = function()
 				return require("codecompanion.adapters").extend("openai_compatible", {
-					name = "openrouter",
-					formatted_name = "openrouter",
 					env = {
 						url = "https://openrouter.ai/api",
-						api_key = openrouter_key,
+						api_key = secret_key,
 						chat_url = "/v1/chat/completions",
 					},
 					schema = {
 						model = {
-							default = "google/gemini-2.5-pro-preview",
-							choices = {
-								"google/gemini-2.5-pro-preview",
-								"google/gemini-2.0-flash-001",
-								"anthropic/claude-3.7-sonnet",
-								"anthropic/claude-3.5-sonnet",
-								"openai/gpt-4o-mini",
-								"openai/gpt-4o",
-							},
-						},
-					},
-				})
-			end,
-			oaipro = function()
-				return require("codecompanion.adapters").extend("openai", {
-					name = "oaipro",
-					formatted_name = "oaipro",
-					url = "https://api1.oaipro.com/v1/chat/completions",
-					env = {
-						api_key = oaipro_key,
-						-- chat_url = "/v1/chat/completions", -- optional: default value, override if different
-					},
-					schema = {
-						model = {
-							default = "gpt-4o",
-							choices = {
-								"gpt-4o",
-								"claude-3-5-sonnet-20240620",
-							},
-						},
-					},
-				})
-			end,
-
-			siliconflow = function()
-				return require("codecompanion.adapters").extend("deepseek", {
-					name = "siliconflow",
-					formatted_name = "siliconflow",
-					url = "https://api.siliconflow.cn/v1/chat/completions",
-					env = {
-						api_key = siliconflow_key,
-						-- chat_url = "/v1/chat/completions", -- optional: default value, override if different
-					},
-					schema = {
-						model = {
-							-- default = "deepseek-ai/DeepSeek-V3",
-							default = "deepseek-ai/DeepSeek-V3",
-							choices = {
-								["deepseek-ai/DeepSeek-R1"] = { opts = { can_reason = true, can_use_tools = false } },
-								["deepseek-ai/DeepSeek-V3"] = { opts = { can_use_tools = true } },
-							},
+							default = current_model,
 						},
 					},
 				})
@@ -123,20 +79,22 @@ return function()
 					full_height = true, -- when set to false, vsplit will be used to open the chat buffer vs. botright/topleft vsplit
 				},
 			},
-		},
-		strategies = {
-			-- Change the default chat adapter
-			chat = {
-				adapter = "openrouter",
+			action_palette = {
+				width = 95,
+				height = 10,
+				prompt = "Prompt ", -- Prompt used for interactive LLM calls
+				provider = "telescope", -- Can be "default", "telescope", "mini_pick" or "snacks". If not specified, the plugin will autodetect installed providers.
+				opts = {
+					show_default_actions = false, -- Show the default actions in the action palette?
+					show_default_prompt_library = false, -- Show the default prompt library in the action palette?
+				},
 			},
-			inline = {
-				adapter = "openrouter",
-			},
-		},
-		opts = {
-			-- Set debug logging
-			log_level = "DEBUG",
 		},
 		prompt_library = require("configs.codecompanion.prompt"),
 	})
+
+	vim.keymap.set({ "n", "v" }, "<leader>mk", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+	vim.keymap.set({ "n", "v" }, "<leader>mc", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+	vim.keymap.set("v", "<leader>ma", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+	vim.keymap.set("n", "<leader>ms", select_model, { desc = "Select CodeCompanion Models" })
 end

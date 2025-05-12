@@ -76,4 +76,17 @@ settings["treesitter_deps"] = function()
 	}
 end
 
+settings["chat_models"] = function()
+	return {
+		"google/gemini-2.5-pro-preview",
+		"google/gemini-2.5-pro-exp-03-25",
+		"google/gemini-2.0-flash-001",
+		"anthropic/claude-3.7-sonnet",
+		"anthropic/claude-3.5-sonnet",
+		"openai/gpt-4o-mini",
+		"deepseek/deepseek-v3-base:free",
+		"deepseek/deepseek-prover-v2:free",
+	}
+end
+
 return settings

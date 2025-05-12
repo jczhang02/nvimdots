@@ -4,7 +4,7 @@ return {
 		description = "Translate Chinese to English academically",
 		opts = {
 			index = 11,
-			is_slash_cmd = false,
+			is_slash_cmd = true,
 			auto_submit = false,
 			short_name = "docs",
 		},
@@ -43,7 +43,7 @@ return {
 		description = "English polish",
 		opts = {
 			index = 11,
-			is_slash_cmd = false,
+			is_slash_cmd = true,
 			auto_submit = false,
 			short_name = "docs",
 		},
