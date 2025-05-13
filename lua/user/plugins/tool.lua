@@ -123,4 +123,15 @@ tool["stevearc/overseer.nvim"] = {
 	end,
 }
 
+-- tool["jczhang02/telescope-asynctasks.nvim"] = {
+-- 	lazy = true,
+-- 	dependencies = {
+-- 		"nvim-telescope/telescope.nvim",
+-- 		"skywind3000/asynctasks.vim",
+-- 	},
+-- 	config = function()
+-- 		require("telescope").extensions.asynctasks.all()
+-- 	end,
+-- }
+
 return tool

@@ -34,8 +34,6 @@ return function()
 			:find()
 	end
 
-	require("configs.spinner"):init()
-
 	require("codecompanion").setup({
 		strategies = {
 			chat = {
@@ -92,9 +90,4 @@ return function()
 		},
 		prompt_library = require("configs.codecompanion.prompt"),
 	})
-
-	vim.keymap.set({ "n", "v" }, "<leader>mk", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-	vim.keymap.set({ "n", "v" }, "<leader>mc", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-	vim.keymap.set("v", "<leader>ma", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
-	vim.keymap.set("n", "<leader>ms", select_model, { desc = "Select CodeCompanion Models" })
 end
