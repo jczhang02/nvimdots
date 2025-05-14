@@ -101,37 +101,9 @@ tool["nvimtools/none-ls-extras.nvim"] = {
 	lazy = true,
 }
 
-tool["stevearc/overseer.nvim"] = {
-	lazy = true,
-	cmd = {
-		"OverseerShell",
-		"OverseerOpen",
-		"OverseerRun",
-		"OverseerToggle",
-	},
-	keys = {
-		{ "<leader>oo", "<cmd>OverseerToggle!<CR>", mode = "n", desc = "[O]verseer [O]pen" },
-		{ "<leader>or", "<cmd>OverseerRun<CR>", mode = "n", desc = "[O]verseer [R]un" },
-		{ "<leader>os", "<cmd>OverseerShell<CR>", mode = "n", desc = "[O]verseer [S]hell" },
-		{ "<leader>od", "<cmd>OverseerQuickAction<CR>", mode = "n", desc = "[O]verseer [D]o quick action" },
-		{ "<leader>ot", "<cmd>OverseerTaskAction<CR>", mode = "n", desc = "[O]verseer [T]ask action" },
-	},
-	config = function()
-		require("overseer").setup({
-			dap = false,
-		})
-	end,
+tool["andrewferrier/debugprint.nvim"] = {
+	lazy = false,
+	config = require("user.configs.tool.debugprint"),
 }
-
--- tool["jczhang02/telescope-asynctasks.nvim"] = {
--- 	lazy = true,
--- 	dependencies = {
--- 		"nvim-telescope/telescope.nvim",
--- 		"skywind3000/asynctasks.vim",
--- 	},
--- 	config = function()
--- 		require("telescope").extensions.asynctasks.all()
--- 	end,
--- }
 
 return tool
