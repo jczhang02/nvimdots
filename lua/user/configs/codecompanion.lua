@@ -1,5 +1,5 @@
 return {
-	prompt_library = require("codecompanion.prompt"),
+	prompt_library = require("user.configs.codecompanion_utils.prompt"),
 	display = {
 		action_palette = {
 			opts = {
