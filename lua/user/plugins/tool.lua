@@ -106,10 +106,10 @@ tool["andrewferrier/debugprint.nvim"] = {
 	config = require("user.configs.tool.debugprint"),
 }
 
-tool["m4xshen/hardtime.nvim"] = {
-	lazy = false,
-	dependencies = { "MunifTanjim/nui.nvim" },
-	opts = {},
-}
+-- tool["m4xshen/hardtime.nvim"] = {
+-- 	lazy = false,
+-- 	dependencies = { "MunifTanjim/nui.nvim" },
+-- 	opts = {},
+-- }
 
 return tool
