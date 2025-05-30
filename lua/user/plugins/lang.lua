@@ -79,4 +79,8 @@ lang["artoj/qmake-syntax-vim"] = {
 	ft = { "qmake" },
 }
 
+lang["junegunn/fzf"] = {
+	build = "./install --all",
+}
+
 return lang
