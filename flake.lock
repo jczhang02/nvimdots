@@ -58,6 +58,7 @@
       },
       "locked": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "lastModified": 1743438213,
         "narHash": "sha256-ZZDN+0v1r4I1xkQWlt8euOJv5S4EvElUCZMrDjTCEsY=",
 ||||||| 9b06748
@@ -67,14 +68,27 @@
         "lastModified": 1746040799,
         "narHash": "sha256-osgPX/SzIpkR50vev/rqoTEAVkEcOWXoQXmbzsaI4KU=",
 >>>>>>> upstream/0.11
+||||||| bedcc7f
+        "lastModified": 1746040799,
+        "narHash": "sha256-osgPX/SzIpkR50vev/rqoTEAVkEcOWXoQXmbzsaI4KU=",
+=======
+        "lastModified": 1748737919,
+        "narHash": "sha256-5kvBbLYdp+n7Ftanjcs6Nv+UO6sBhelp6MIGJ9nWmjQ=",
+>>>>>>> upstream/0.11
         "owner": "nix-community",
         "repo": "home-manager",
+<<<<<<< HEAD
 <<<<<<< HEAD
         "rev": "ccd7df836e1f42ea84806760f25b77b586370259",
 ||||||| 9b06748
         "rev": "f0b5e7e8a75abdea32bbff09ddd7b6eeb4b9b445",
 =======
         "rev": "5f217e5a319f6c186283b530f8c975e66c028433",
+>>>>>>> upstream/0.11
+||||||| bedcc7f
+        "rev": "5f217e5a319f6c186283b530f8c975e66c028433",
+=======
+        "rev": "5675a9686851d9626560052a032c4e14e533c1fa",
 >>>>>>> upstream/0.11
         "type": "github"
       },
@@ -132,6 +146,7 @@
     "nixpkgs_2": {
       "locked": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "lastModified": 1743320628,
         "narHash": "sha256-FurMxmjEEqEMld11eX2vgfAx0Rz0JhoFm8UgxbfCZa8=",
 ||||||| 9b06748
@@ -141,14 +156,27 @@
         "lastModified": 1745998881,
         "narHash": "sha256-vonyYAKJSlsX4n9GCsS0pHxR6yCrfqBIuGvANlkwG6U=",
 >>>>>>> upstream/0.11
+||||||| bedcc7f
+        "lastModified": 1745998881,
+        "narHash": "sha256-vonyYAKJSlsX4n9GCsS0pHxR6yCrfqBIuGvANlkwG6U=",
+=======
+        "lastModified": 1748662220,
+        "narHash": "sha256-7gGa49iB9nCnFk4h/g9zwjlQAyjtpgcFkODjcOQS0Es=",
+>>>>>>> upstream/0.11
         "owner": "nixos",
         "repo": "nixpkgs",
+<<<<<<< HEAD
 <<<<<<< HEAD
         "rev": "63158b9cbb6ec93d26255871c447b0f01da81619",
 ||||||| 9b06748
         "rev": "3a05eebede89661660945da1f151959900903b6a",
 =======
         "rev": "423d2df5b04b4ee7688c3d71396e872afa236a89",
+>>>>>>> upstream/0.11
+||||||| bedcc7f
+        "rev": "423d2df5b04b4ee7688c3d71396e872afa236a89",
+=======
+        "rev": "59138c7667b7970d205d6a05a8bfa2d78caa3643",
 >>>>>>> upstream/0.11
         "type": "github"
       },
