@@ -14,6 +14,7 @@ settings["server_formatting_block_list"] = {
 	pyright = true,
 	basepyright = true,
 	ruff = true,
+	taplo = false,
 }
 
 settings["null_ls_deps"] = {

@@ -7,15 +7,9 @@ return {
 			filetypes = { "c", "cpp" },
 			extra_args = { "-style={BasedOnStyle: LLVM, IndentWidth: 4}" },
 		}),
-		-- btns.formatting.black.with({
-		-- 	extra_args = { "--line-length=80", "--experimental-string-processing" },
+		-- btns.formatting.prettier.with({
+		-- 	extra_filetypes = { "toml" },
 		-- }),
-		-- btns.formatting.yapf.with({
-		-- 	extra_args = {
-		-- 		"--style={based_on_style: facebook, indent_width: 4}",
-		-- 	},
-		-- }),
-		--
 		require("user.configs.formatters.latexindent"),
 		require("user.configs.formatters.bibtex-tidy"),
 		require("user.configs.formatters.xmlformat"),
