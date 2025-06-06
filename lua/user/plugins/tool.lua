@@ -112,4 +112,13 @@ tool["andrewferrier/debugprint.nvim"] = {
 -- 	opts = {},
 -- }
 
+tool["ravitemer/mcphub.nvim"] = {
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"olimorris/codecompanion.nvim",
+	},
+	build = "pnpm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
+	config = require("configs.tool.mcp-hub"),
+}
+
 return tool
