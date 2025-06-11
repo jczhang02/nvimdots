@@ -30,11 +30,16 @@ lang["benlubas/molten-nvim"] = {
 }
 
 lang["R-nvim/R.nvim"] = {
-	lazy = false,
+	lazy = true,
+	ft = { "rmd", "r" },
 	config = function()
 		-- Create a table with the options to be passed to setup()
 		---@type RConfigUserOpts
 		local opts = {
+			-- latexcmd = { "latexmk", "-pdf", '-pdflatex="xelatex %O -synctex=1 %S"' },
+			latexcmd = { "xelatex" },
+			latex_build_dir = "build",
+			rmarkdown_args = "output_dir = 'output', clean = FALSE",
 			hook = {
 				on_filetype = function()
 					vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {})
@@ -43,7 +48,8 @@ lang["R-nvim/R.nvim"] = {
 			},
 			R_args = { "--quiet", "--no-save" },
 			min_editor_width = 72,
-			rconsole_width = 78,
+			rconsole_width = 0,
+			rconsole_height = 10,
 			objbr_mappings = { -- Object browser keymap
 				c = "class", -- Call R functions
 				["<localleader>gg"] = "head({object}, n = 15)", -- Use {object} notation to write arbitrary R code.
@@ -62,10 +68,8 @@ lang["R-nvim/R.nvim"] = {
 		-- Check if the environment variable "R_AUTO_START" exists.
 		-- If using fish shell, you could put in your config.fish:
 		-- alias r "R_AUTO_START=true nvim"
-		if vim.env.R_AUTO_START == "true" then
-			opts.auto_start = "on startup"
-			opts.objbr_auto_start = true
-		end
+		opts.auto_start = "on startup"
+		opts.objbr_auto_start = false
 		require("r").setup(opts)
 	end,
 }
