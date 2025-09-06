@@ -17,27 +17,28 @@ _G._flash_esc_or_noh = function()
 	end
 end
 
-_G._telescope_collections = function(picker_type)
+_G._telescope_collections = function(opts)
+	local tabs = require("search.tabs")
 	local actions = require("telescope.actions")
-	local action_state = require("telescope.actions.state")
-	local conf = require("telescope.config").values
-	local finder = require("telescope.finders")
+	local state = require("telescope.actions.state")
 	local pickers = require("telescope.pickers")
-	picker_type = picker_type or {}
+	local finders = require("telescope.finders")
+	local conf = require("telescope.config").values
+	local collections = vim.tbl_keys(tabs.collections)
 
-	local collections = vim.tbl_keys(require("search.tabs").collections)
+	-- build and launch picker
+	opts = opts or {}
 	pickers
-		.new(picker_type, {
+		.new(opts, {
 			prompt_title = "Telescope Collections",
-			finder = finder.new_table({ results = collections }),
-			sorter = conf.generic_sorter(picker_type),
+			finder = finders.new_table({ results = collections }),
+			sorter = conf.generic_sorter(opts),
 			attach_mappings = function(bufnr)
 				actions.select_default:replace(function()
 					actions.close(bufnr)
-					local selection = action_state.get_selected_entry()
+					local selection = state.get_selected_entry()
 					require("search").open({ collection = selection[1] })
 				end)
-
 				return true
 			end,
 		})
@@ -54,17 +55,14 @@ _G._toggle_inlayhint = function()
 	)
 end
 
-_G._toggle_virtualtext = function()
-	local _vl_enabled = require("core.settings").diagnostics_virtual_lines
-	if _vl_enabled then
-		local vl_config = not vim.diagnostic.config().virtual_lines
-		vim.diagnostic.config({ virtual_lines = vl_config })
-		vim.notify(
-			(vl_config and "Virtual lines is now displayed" or "Virtual lines is now hidden"),
-			vim.log.levels.INFO,
-			{ title = "LSP Diagnostic" }
-		)
-	end
+_G._toggle_virtuallines = function()
+	require("tiny-inline-diagnostic").toggle()
+	vim.notify(
+		"Virtual lines are now "
+			.. (require("tiny-inline-diagnostic.diagnostic").user_toggle_state and "displayed" or "hidden"),
+		vim.log.levels.INFO,
+		{ title = "LSP Diagnostic" }
+	)
 end
 
 local _lazygit = nil

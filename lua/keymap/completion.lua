@@ -26,8 +26,7 @@ function M.lsp(buf)
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline"),
 		["n|gto"] = map_callback(function()
-				local search_backend = require("core.settings").search_backend
-				if search_backend == "fzf" then
+				if require("core.settings").search_backend == "fzf" then
 					local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position
 					require("fzf-lua").lsp_document_symbols({
 						fzf_opts = { ["--layout"] = prompt_position == "top" and "reverse" or "default" },
@@ -84,17 +83,17 @@ function M.lsp(buf)
 			:with_buffer(buf)
 			:with_desc("lsp: Show outgoing calls"),
 		["n|<leader>lv"] = map_callback(function()
-				_toggle_virtualtext()
+				_toggle_virtuallines()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("lsp: Toggle virtual text display"),
+			:with_desc("lsp: Toggle virtual lines"),
 		["n|<leader>lh"] = map_callback(function()
 				_toggle_inlayhint()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("lsp: Toggle inlay hints display"),
+			:with_desc("lsp: Toggle inlay hints"),
 	}
 	bind.nvim_load_mapping(map)
 
