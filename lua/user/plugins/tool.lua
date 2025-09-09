@@ -22,22 +22,6 @@ tool["skywind3000/asynctasks.vim"] = {
 	config = require("configs.tool.asynctask"),
 }
 
--- tool["nvim-neo-tree/neo-tree.nvim"] = {
--- 	lazy = true,
--- 	cmd = {
--- 		"Neotree",
--- 	},
--- 	branch = "v3.x",
--- 	dependencies = {
--- 		"nvim-lua/plenary.nvim",
--- 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
--- 		"MunifTanjim/nui.nvim",
--- 		"saifulapm/neotree-file-nesting-config",
--- 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
--- 	},
--- 	config = require("configs.tool.neo-tree"),
--- }
-
 tool["wintermute-cell/gitignore.nvim"] = {
 	lazy = true,
 	requires = {
@@ -105,12 +89,6 @@ tool["andrewferrier/debugprint.nvim"] = {
 	lazy = false,
 	config = require("user.configs.tool.debugprint"),
 }
-
--- tool["m4xshen/hardtime.nvim"] = {
--- 	lazy = false,
--- 	dependencies = { "MunifTanjim/nui.nvim" },
--- 	opts = {},
--- }
 
 tool["ravitemer/mcphub.nvim"] = {
 	dependencies = {

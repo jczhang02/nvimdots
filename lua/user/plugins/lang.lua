@@ -74,11 +74,6 @@ lang["R-nvim/R.nvim"] = {
 	end,
 }
 
--- lang["fedorenchik/qt-support.vim"] = {
--- 	lazy = true,
--- 	ft = { "cpp", "pro" },
--- }
-
 lang["artoj/qmake-syntax-vim"] = {
 	ft = { "qmake" },
 }
