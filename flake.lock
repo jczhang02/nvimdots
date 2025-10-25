@@ -25,6 +25,7 @@
       "locked": {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "lastModified": 1741352980,
         "narHash": "sha256-+u2UunDA4Cl5Fci3m7S643HzKmIDAe+fiXrLqYsR2fs=",
 ||||||| 9b06748
@@ -41,8 +42,16 @@
         "lastModified": 1754487366,
         "narHash": "sha256-pHYj8gUBapuUzKV/kN/tR3Zvqc7o6gdFB9XKXIp1SQ8=",
 >>>>>>> upstream/main
+||||||| 2ba4d59
+        "lastModified": 1754487366,
+        "narHash": "sha256-pHYj8gUBapuUzKV/kN/tR3Zvqc7o6gdFB9XKXIp1SQ8=",
+=======
+        "lastModified": 1756770412,
+        "narHash": "sha256-+uWLQZccFHwqpGqr2Yt5VsW/PbeJVTn9Dk6SHWhNRPw=",
+>>>>>>> upstream/main
         "owner": "hercules-ci",
         "repo": "flake-parts",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         "rev": "f4330d22f1c5d2ba72d3d22df5597d123fdb60a9",
@@ -55,6 +64,11 @@
         "rev": "c621e8422220273271f52058f618c94e405bb0f5",
 =======
         "rev": "af66ad14b28a127c5c0f3bbb298218fc63528a18",
+>>>>>>> upstream/main
+||||||| 2ba4d59
+        "rev": "af66ad14b28a127c5c0f3bbb298218fc63528a18",
+=======
+        "rev": "4524271976b625a4a605beefd893f270620fd751",
 >>>>>>> upstream/main
         "type": "github"
       },
@@ -71,6 +85,7 @@
         ]
       },
       "locked": {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -97,8 +112,16 @@
         "lastModified": 1756683562,
         "narHash": "sha256-3fcIqwm1u+rF3kkgUYYEIcLrs93+Pi+a6AwiEAxdP5g=",
 >>>>>>> upstream/main
+||||||| 2ba4d59
+        "lastModified": 1756683562,
+        "narHash": "sha256-3fcIqwm1u+rF3kkgUYYEIcLrs93+Pi+a6AwiEAxdP5g=",
+=======
+        "lastModified": 1759261733,
+        "narHash": "sha256-G104PUPKBgJmcu4NWs0LUaPpSOTD4jiq4mamLWu3Oc0=",
+>>>>>>> upstream/main
         "owner": "nix-community",
         "repo": "home-manager",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -117,6 +140,11 @@
         "rev": "5675a9686851d9626560052a032c4e14e533c1fa",
 =======
         "rev": "fccb44df77266a3891939f35197f538dace3442f",
+>>>>>>> upstream/main
+||||||| 2ba4d59
+        "rev": "fccb44df77266a3891939f35197f538dace3442f",
+=======
+        "rev": "5a21f4819ee1be645f46d6b255d49f4271ef6723",
 >>>>>>> upstream/main
         "type": "github"
       },
@@ -146,6 +174,7 @@
       "locked": {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "lastModified": 1740877520,
         "narHash": "sha256-oiwv/ZK/2FhGxrCkQkB83i7GnWXPPLzoqFHpDD3uYpk=",
         "owner": "nix-community",
@@ -167,9 +196,16 @@
         "lastModified": 1753579242,
         "narHash": "sha256-zvaMGVn14/Zz8hnp4VWT9xVnhc8vuL3TStRqwk22biA=",
 >>>>>>> upstream/main
+||||||| 2ba4d59
+        "lastModified": 1753579242,
+        "narHash": "sha256-zvaMGVn14/Zz8hnp4VWT9xVnhc8vuL3TStRqwk22biA=",
+=======
+        "lastModified": 1754788789,
+        "narHash": "sha256-x2rJ+Ovzq0sCMpgfgGaaqgBSwY+LST+WbZ6TytnT9Rk=",
+>>>>>>> upstream/main
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "0f36c44e01a6129be94e3ade315a5883f0228a6e",
+        "rev": "a73b9c743612e4244d865a2fdee11865283c04e6",
         "type": "github"
 >>>>>>> upstream/0.11
       },
@@ -181,6 +217,7 @@
     },
     "nixpkgs_2": {
       "locked": {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -207,8 +244,16 @@
         "lastModified": 1756636162,
         "narHash": "sha256-mBecwgUTWRgClJYqcF+y4O1bY8PQHqeDpB+zsAn+/zA=",
 >>>>>>> upstream/main
+||||||| 2ba4d59
+        "lastModified": 1756636162,
+        "narHash": "sha256-mBecwgUTWRgClJYqcF+y4O1bY8PQHqeDpB+zsAn+/zA=",
+=======
+        "lastModified": 1759070547,
+        "narHash": "sha256-JVZl8NaVRYb0+381nl7LvPE+A774/dRpif01FKLrYFQ=",
+>>>>>>> upstream/main
         "owner": "nixos",
         "repo": "nixpkgs",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -227,6 +272,11 @@
         "rev": "59138c7667b7970d205d6a05a8bfa2d78caa3643",
 =======
         "rev": "37ff64b7108517f8b6ba5705ee5085eac636a249",
+>>>>>>> upstream/main
+||||||| 2ba4d59
+        "rev": "37ff64b7108517f8b6ba5705ee5085eac636a249",
+=======
+        "rev": "647e5c14cbd5067f44ac86b74f014962df460840",
 >>>>>>> upstream/main
         "type": "github"
       },
