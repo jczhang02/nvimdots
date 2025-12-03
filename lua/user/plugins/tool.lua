@@ -99,4 +99,6 @@ tool["ravitemer/mcphub.nvim"] = {
 	config = require("configs.tool.mcp-hub"),
 }
 
+tool["hotoo/pangu.vim"] = {}
+
 return tool
