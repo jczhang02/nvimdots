@@ -4,7 +4,7 @@ local settings = {}
 -- Examples
 settings["use_ssh"] = false
 settings["use_copilot"] = false
-settings["colorscheme"] = "catppuccin-latte"
+settings["colorscheme"] = "catppuccin-mocha"
 settings["background"] = "dark"
 settings["server_formatting_block_list"] = {
 	lua_ls = true,
@@ -13,7 +13,7 @@ settings["server_formatting_block_list"] = {
 	texlab = true,
 	pyright = true,
 	basepyright = true,
-	ruff = true,
+	ruff = false,
 	taplo = false,
 }
 
