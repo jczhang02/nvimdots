@@ -19,6 +19,10 @@ editor["kylechui/nvim-surround"] = {
 	config = require("configs.editor.nvim-surround"),
 }
 
+editor["nvim-treesitter/nvim-treesitter"] = {
+	commit = "4fc09bee78e91bf4ba471cdab4bf9dfa37fde51c",
+}
+
 -- editor["hiphish/rainbow-delimiters.nvim"] = {
 -- 	submodules = false,
 -- }

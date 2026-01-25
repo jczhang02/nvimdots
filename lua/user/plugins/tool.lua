@@ -1,5 +1,7 @@
 local tool = {}
 
+local settings = require("core.settings")
+
 tool["numToStr/Navigator.nvim"] = {
 	lazy = true,
 	event = "VeryLazy",
@@ -99,6 +101,17 @@ tool["ravitemer/mcphub.nvim"] = {
 	config = require("configs.tool.mcp-hub"),
 }
 
-tool["hotoo/pangu.vim"] = {}
+if settings.use_chat then
+	tool["olimorris/codecompanion.nvim"] = {
+		tag = "v18.3.1",
+	}
+end
+
+tool["hotoo/pangu.vim"] = {
+	lazy = true,
+	cmd = {
+		"Pangu",
+	},
+}
 
 return tool

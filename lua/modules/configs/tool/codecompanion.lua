@@ -63,7 +63,7 @@ return function()
 			chat = {
 				window = {
 					layout = "vertical", -- float|vertical|horizontal|buffer
-					position = "right", -- left|right|top|bottom (nil will default depending on vim.opt.plitright|vim.opt.splitbelow)
+					position = "", -- left|right|top|bottom (nil will default depending on vim.opt.plitright|vim.opt.splitbelow)
 					border = "single",
 					width = 0.25,
 					relative = "editor",
