@@ -29,41 +29,27 @@ return function()
 		return (diff < 0)
 	end
 
-	local use_copilot = require("core.settings").use_copilot
-	local comparators = use_copilot == true
-			and {
-				compare.offset, -- Items closer to cursor will have lower priority
-				compare.exact,
-				-- compare.scopes,
-				compare.lsp_scores,
-				compare.sort_text,
-				compare.score,
-				compare.recently_used,
-				-- compare.locality, -- Items closer to cursor will have higher priority, conflicts with `offset`
-				require("cmp-under-comparator").under,
-				compare.kind,
-				compare.length,
-				compare.order,
-			}
-		or {
-			-- require("cmp_tabnine.compare"),
-			compare.offset, -- Items closer to cursor will have lower priority
-			compare.exact,
-			-- compare.scopes,
-			compare.lsp_scores,
-			compare.sort_text,
-			compare.score,
-			compare.recently_used,
-			-- compare.locality, -- Items closer to cursor will have higher priority, conflicts with `offset`
-			require("cmp-under-comparator").under,
-			compare.kind,
-			compare.length,
-			compare.order,
-		}
+	local comparators = vim.list_extend(require("core.settings").use_copilot and {
+		require("copilot_cmp.comparators").prioritize,
+		require("copilot_cmp.comparators").score,
+	} or {}, {
+		compare.offset, -- Items closer to cursor will have lower priority
+		compare.exact,
+		-- compare.scopes,
+		compare.lsp_scores,
+		compare.sort_text,
+		compare.score,
+		compare.recently_used,
+		-- compare.locality, -- Items closer to cursor will have higher priority, conflicts with `offset`
+		require("cmp-under-comparator").under,
+		compare.kind,
+		compare.length,
+		compare.order,
+	})
 
 	local cmp = require("cmp")
-	cmp.setup({
-		preselect = cmp.PreselectMode.Item,
+	require("cmp").setup({
+		preselect = cmp.PreselectMode.None,
 		window = {
 			completion = {
 				border = border("PmenuBorder"),
@@ -87,16 +73,15 @@ return function()
 				vim_item.kind =
 					string.format(" %s  %s", lspkind_icons[vim_item.kind] or icons.cmp.undefined, vim_item.kind or "")
 
+				-- set up labels for completion entries
 				vim_item.menu = setmetatable({
-					codecompanion = "[CC]",
+					-- minuet = "[MINE]",
 					copilot = "[CPLT]",
 					buffer = "[BUF]",
 					orgmode = "[ORG]",
 					nvim_lsp = "[LSP]",
-					nvim_lua = "[LUA]",
 					path = "[PATH]",
 					tmux = "[TMUX]",
-					treesitter = "[TS]",
 					latex_symbols = "[LTEX]",
 					luasnip = "[SNIP]",
 					spell = "[SPELL]",
@@ -106,10 +91,16 @@ return function()
 					end,
 				})[entry.source.name]
 
+				-- cut down long results
 				local label = vim_item.abbr
 				local truncated_label = vim.fn.strcharpart(label, 0, 80)
 				if truncated_label ~= label then
 					vim_item.abbr = truncated_label .. "..."
+				end
+
+				-- deduplicate results from nvim_lsp
+				if entry.source.name == "nvim_lsp" then
+					vim_item.dup = 0
 				end
 
 				return vim_item
@@ -121,43 +112,45 @@ return function()
 		performance = {
 			async_budget = 1,
 			max_view_entries = 120,
+			fetching_timeout = 2000,
 		},
 		-- You can set mappings if you want
 		mapping = cmp.mapping.preset.insert({
-			["<CR>"] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace }),
-			["<C-p>"] = cmp.mapping.select_prev_item(),
-			["<C-n>"] = cmp.mapping.select_next_item(),
+			["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+			["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
 			["<C-d>"] = cmp.mapping.scroll_docs(-4),
 			["<C-f>"] = cmp.mapping.scroll_docs(4),
-			["<C-w>"] = cmp.mapping.close(),
+			["<C-w>"] = cmp.mapping.abort(),
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
-					cmp.select_next_item()
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+				elseif require("luasnip").expand_or_locally_jumpable() then
+					require("luasnip").expand_or_jump()
 				else
 					fallback()
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
-					cmp.select_prev_item()
-				else
-					fallback()
-				end
-			end, { "i", "s" }),
-			["<C-l>"] = cmp.mapping(function(fallback)
-				if require("luasnip").expand_or_locally_jumpable() then
-					require("luasnip").expand_or_jump()
-				else
-					fallback()
-				end
-			end, { "i", "s" }),
-			["<C-h>"] = cmp.mapping(function(fallback)
-				if require("luasnip").jumpable(-1) then
+					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+				elseif require("luasnip").jumpable(-1) then
 					require("luasnip").jump(-1)
 				else
 					fallback()
 				end
 			end, { "i", "s" }),
+
+			["<CR>"] = cmp.mapping({
+				i = function(fallback)
+					if cmp.visible() then
+						cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false })
+					else
+						fallback()
+					end
+				end,
+				s = cmp.mapping.confirm({ select = true }),
+				c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
+			}),
 		}),
 		snippet = {
 			expand = function(args)
@@ -166,11 +159,10 @@ return function()
 		},
 		-- You should specify your *installed* sources.
 		sources = {
+			-- { name = "minuet" },
 			{ name = "nvim_lsp", max_item_count = 350 },
-			{ name = "nvim_lua" },
 			{ name = "luasnip" },
 			{ name = "path" },
-			{ name = "treesitter" },
 			{ name = "spell" },
 			{ name = "tmux" },
 			{ name = "orgmode" },
@@ -178,13 +170,12 @@ return function()
 				name = "buffer",
 				option = {
 					get_bufnrs = function()
-						return vim.api.nvim_list_bufs()
+						return vim.api.nvim_buf_line_count(0) < 15000 and vim.api.nvim_list_bufs() or {}
 					end,
 				},
 			},
-			{
-				name = "codecompanion",
-			},
+			{ name = "latex_symbols" },
+			{ name = "copilot" },
 		},
 		experimental = {
 			ghost_text = {
