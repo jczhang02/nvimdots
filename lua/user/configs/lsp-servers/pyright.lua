@@ -1,34 +1,45 @@
+local new_capability = {
+	-- this will remove some of the diagnostics that duplicates those from ruff, idea taken and adapted from
+	-- here: https://github.com/astral-sh/ruff-lsp/issues/384#issuecomment-1989619482
+	textDocument = {
+		publishDiagnostics = {
+			tagSupport = {
+				valueSet = { 2 },
+			},
+		},
+		hover = {
+			contentFormat = { "plaintext" },
+			dynamicRegistration = true,
+		},
+	},
+}
 return {
 	cmd = { "delance-langserver", "--stdio" },
-	-- filetypes = { "python" },
 	settings = {
-		pylance = {
+		pyright = {
+			-- disable import sorting and use Ruff for this
 			disableOrganizeImports = true,
-			disableTaggedHints = true,
+			disableTaggedHints = false,
 		},
 		python = {
-			pythonPath = vim.fn.exepath("python"),
 			analysis = {
-				autoImportCompletions = true,
 				autoSearchPaths = true,
-				diagnosticMode = "workspace", -- openFilesOnly, workspace
-				typeCheckingMode = "basic", -- off, basic, strict
+				diagnosticMode = "workspace",
+				typeCheckingMode = "standard",
 				useLibraryCodeForTypes = true,
-				extraPaths = {},
+				-- we can this setting below to redefine some diagnostics
 				diagnosticSeverityOverrides = {
-					-- reportGeneralTypeIssues = "none",
-					-- reportUnboundVariable = false,
-					-- strictParameterNoneValue = false,
+					deprecateTypingAliases = false,
 				},
-				stubPath = vim.fn.stdpath("data") .. "/site/lazy/python-type-stubs",
+				-- inlay hint settings are provided by pylance?
 				inlayHints = {
+					callArgumentNames = "partial",
 					functionReturnTypes = true,
 					pytestParameters = true,
 					variableTypes = true,
-					callArgumentNames = "partial",
 				},
 			},
 		},
 	},
-	single_file_support = true,
+	capabilities = new_capability,
 }

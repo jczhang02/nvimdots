@@ -46,10 +46,10 @@ tool["keaising/im-select.nvim"] = {
 	config = require("configs.tool.im-select"),
 }
 
-tool["windwp/nvim-autopairs"] = {
-	event = "InsertEnter",
-	config = require("user.configs.tool.autopairs"),
-}
+-- tool["windwp/nvim-autopairs"] = {
+-- 	event = "InsertEnter",
+-- 	config = require("user.configs.tool.autopairs"),
+-- }
 
 tool["TobinPalmer/pastify.nvim"] = {
 	cmd = { "Pastify" },
@@ -59,26 +59,13 @@ tool["TobinPalmer/pastify.nvim"] = {
 				absolute_path = false, -- use absolute or relative path to the working directory
 				apikey = "", -- Api key, required for online saving
 				local_path = "/figures", -- The path to put local files in, ex ~/Projects/<name>/assets/images/<imgname>.png
-				save = "local", -- Either 'local' or 'online'
+				ft = { -- Custom snippets for different filetypes, will replace $IMG$ with the image url
+					html = '<img src="$IMG$" alt="">',
+					markdown = "![]($IMG$)",
+					tex = [[\includegraphics[width=\linewidth]{$IMG$}]],
+				}, -- Either 'local' or 'online'
 			},
-			ft = { -- Custom snippets for different filetypes, will replace $IMG$ with the image url
-				html = '<img src="$IMG$" alt="">',
-				markdown = "![]($IMG$)",
-				tex = [[\includegraphics[width=\linewidth]{$IMG$}]],
-			},
-		})
-	end,
-}
-
-tool["nvimdev/template.nvim"] = {
-	lazy = true,
-	cmd = { "Template", "TemProject" },
-	config = function()
-		require("template").setup({
-			-- config in there
-			temp_dir = "~/.config/nvim/templates",
-			author = "Chengrui Zhang",
-			email = "jczhang@live.it",
+			save = "local",
 		})
 	end,
 }
@@ -107,57 +94,6 @@ if settings.use_chat then
 	}
 end
 
--- tool["milanglacier/minuet-ai.nvim"] = {
--- 	lazy = false,
--- 	dependencies = {
--- 		{ "nvim-lua/plenary.nvim" },
--- 		-- optional, if you are using virtual-text frontend, nvim-cmp is not
--- 		-- required.
--- 		{ "hrsh7th/nvim-cmp" },
--- 	},
--- 	config = function()
--- 		require("minuet").setup({
--- 			virtualtext = {
--- 				auto_trigger_ft = {},
--- 				keymap = {
--- 					-- accept whole completion
--- 					accept = "<A-A>",
--- 					-- accept one line
--- 					accept_line = "<A-a>",
--- 					-- accept n lines (prompts for number)
--- 					-- e.g. "A-z 2 CR" will accept 2 lines
--- 					accept_n_lines = "<A-z>",
--- 					-- Cycle to prev completion item, or manually invoke completion
--- 					prev = "<A-[>",
--- 					-- Cycle to next completion item, or manually invoke completion
--- 					next = "<A-]>",
--- 					dismiss = "<A-e>",
--- 				},
--- 			},
--- 			provider = "openai_compatible",
--- 			request_timeout = 2.5,
--- 			throttle = 1500, -- Increase to reduce costs and avoid rate limits
--- 			debounce = 600, -- Increase to reduce costs and avoid rate limits
--- 			provider_options = {
--- 				openai_compatible = {
--- 					api_key = "MINUET_API_KEY",
--- 					end_point = "https://openrouter.ai/api/v1/chat/completions",
--- 					model = "moonshotai/kimi-k2",
--- 					name = "Openrouter",
--- 					optional = {
--- 						max_tokens = 56,
--- 						top_p = 0.9,
--- 						provider = {
--- 							-- Prioritize throughput for faster completion
--- 							sort = "throughput",
--- 						},
--- 					},
--- 				},
--- 			},
--- 		})
--- 	end,
--- }
-
 tool["inhesrom/remote-ssh.nvim"] = {
 	branch = "master",
 	dependencies = {
@@ -181,4 +117,65 @@ tool["inhesrom/remote-ssh.nvim"] = {
 		require("remote-ssh").setup({})
 	end,
 }
+
+tool["ThePrimeagen/harpoon"] = {
+	branch = "harpoon2",
+	config = function()
+		local harpoon = require("harpoon")
+
+		-- REQUIRED
+		harpoon:setup()
+		-- REQUIRED
+
+		local conf = require("telescope.config").values
+		local function toggle_telescope(harpoon_files)
+			local file_paths = {}
+			for _, item in ipairs(harpoon_files.items) do
+				table.insert(file_paths, item.value)
+			end
+
+			require("telescope.pickers")
+				.new({}, {
+					prompt_title = "Harpoon",
+					finder = require("telescope.finders").new_table({
+						results = file_paths,
+					}),
+					previewer = conf.file_previewer({}),
+					sorter = conf.generic_sorter({}),
+				})
+				:find()
+		end
+
+		vim.keymap.set("n", "<leader>ha", function()
+			harpoon:list():add()
+		end, { desc = "Harpoon: add file" })
+		vim.keymap.set("n", "<leader>hh", function()
+			toggle_telescope(harpoon:list())
+		end, { desc = "Harpoon: quick menu" })
+
+		vim.keymap.set("n", "<leader>1", function()
+			harpoon:list():select(1)
+		end, { desc = "Harpoon: file 1" })
+		vim.keymap.set("n", "<leader>2", function()
+			harpoon:list():select(2)
+		end, { desc = "Harpoon: file 2" })
+		vim.keymap.set("n", "<leader>3", function()
+			harpoon:list():select(3)
+		end, { desc = "Harpoon: file 3" })
+		vim.keymap.set("n", "<leader>4", function()
+			harpoon:list():select(4)
+		end, { desc = "Harpoon: file 4" })
+
+		-- Toggle previous & next buffers stored within Harpoon list
+		vim.keymap.set("n", "<leader>hp", function()
+			harpoon:list():prev()
+		end, { desc = "Harpoon: prev file" })
+		vim.keymap.set("n", "<leader>hn", function()
+			harpoon:list():next()
+		end, { desc = "Harpoon: next file" })
+	end,
+
+	dependencies = { { "nvim-lua/plenary.nvim" } },
+}
+
 return tool

@@ -101,6 +101,7 @@ local function autopair_confirm_done()
 			filetypes = {
 				rust = false,
 				go = false,
+				python = false,
 			},
 		})
 	)
