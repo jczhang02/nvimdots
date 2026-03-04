@@ -80,6 +80,7 @@ tool["andrewferrier/debugprint.nvim"] = {
 }
 
 tool["ravitemer/mcphub.nvim"] = {
+	event = "VeryLazy",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"olimorris/codecompanion.nvim",
