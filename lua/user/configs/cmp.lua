@@ -49,7 +49,6 @@ return {
 				},
 			},
 			{ name = "latex_symbols" },
-			{ name = "copilot" },
 		},
 	},
 }

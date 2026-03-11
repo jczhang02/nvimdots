@@ -79,16 +79,6 @@ tool["andrewferrier/debugprint.nvim"] = {
 	config = require("user.configs.tool.debugprint"),
 }
 
-tool["ravitemer/mcphub.nvim"] = {
-	event = "VeryLazy",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"olimorris/codecompanion.nvim",
-	},
-	build = "pnpm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
-	config = require("configs.tool.mcp-hub"),
-}
-
 if settings.use_chat then
 	tool["olimorris/codecompanion.nvim"] = {
 		version = "^18.0.0",
@@ -178,5 +168,40 @@ tool["ThePrimeagen/harpoon"] = {
 
 	dependencies = { { "nvim-lua/plenary.nvim" } },
 }
+
+-- tool["nickjvandyke/opencode.nvim"] = {
+-- 	version = "*", -- Latest stable release
+-- 	-- No snacks.nvim: falls back to native vim.ui.input/vim.ui.select
+-- 	config = function()
+-- 		---@type opencode.Opts
+-- 		vim.g.opencode_opts = {}
+
+-- 		vim.o.autoread = true -- Required for `opts.events.reload`
+
+-- 		vim.keymap.set({ "n", "x" }, "<leader>oa", function()
+-- 			require("opencode").ask("@this: ", { submit = true })
+-- 		end, { desc = "Opencode: ask" })
+-- 		vim.keymap.set({ "n", "x" }, "<leader>os", function()
+-- 			require("opencode").select()
+-- 		end, { desc = "Opencode: select action" })
+-- 		vim.keymap.set({ "n", "t" }, "<leader>ot", function()
+-- 			require("opencode").toggle()
+-- 		end, { desc = "Opencode: toggle" })
+
+-- 		vim.keymap.set({ "n", "x" }, "go", function()
+-- 			return require("opencode").operator("@this ")
+-- 		end, { desc = "Opencode: add range", expr = true })
+-- 		vim.keymap.set("n", "goo", function()
+-- 			return require("opencode").operator("@this ") .. "_"
+-- 		end, { desc = "Opencode: add line", expr = true })
+
+-- 		vim.keymap.set("n", "<S-C-u>", function()
+-- 			require("opencode").command("session.half.page.up")
+-- 		end, { desc = "Opencode: scroll up" })
+-- 		vim.keymap.set("n", "<S-C-d>", function()
+-- 			require("opencode").command("session.half.page.down")
+-- 		end, { desc = "Opencode: scroll down" })
+-- 	end,
+-- }
 
 return tool

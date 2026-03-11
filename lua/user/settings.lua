@@ -4,7 +4,7 @@ local settings = {}
 -- Examples
 settings["use_ssh"] = false
 settings["use_copilot"] = false
-settings["colorscheme"] = "catppuccin-mocha"
+settings["colorscheme"] = "catppuccin-latte"
 settings["background"] = "dark"
 settings["server_formatting_block_list"] = {
 	lua_ls = true,
@@ -40,6 +40,7 @@ end
 settings["disabled_plugins"] = {
 	-- "nvim-tree/nvim-tree.lua",
 	-- "m4xshen/autoclose.nvim",
+	"zbirenbaum/copilot.lua",
 }
 
 settings["gui_config"] = {
