@@ -2,7 +2,7 @@ local settings = {}
 
 settings.colorscheme = "catppuccin-latte"
 settings.background = "dark"
-settings.use_ssh = true
+settings.use_ssh = false
 settings.use_copilot = false
 settings.use_chat = false
 
@@ -23,7 +23,6 @@ settings.server_formatting_block_list = {
 	lua_ls = true,
 	clangd = true,
 	texlab = true,
-	basedpyright = true,
 	pyright = true,
 	ruff = false,
 	taplo = false,
