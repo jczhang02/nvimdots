@@ -48,6 +48,10 @@ settings["gui_config"] = {
 	font_size = 11,
 }
 
+settings["neovide_config"] = {
+	fullscreen = false,
+}
+
 settings["treesitter_deps"] = function()
 	return {
 		"bash",

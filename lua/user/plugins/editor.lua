@@ -14,6 +14,7 @@ editor["kevinhwang91/nvim-hlslens"] = {
 }
 
 editor["kylechui/nvim-surround"] = {
+	lazy = true,
 	version = "*", -- Use for stability; omit to use `main` branch for the latest features
 	event = "InsertEnter",
 	config = require("configs.editor.nvim-surround"),

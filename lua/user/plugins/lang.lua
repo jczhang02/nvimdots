@@ -1,7 +1,8 @@
 local lang = {}
 
 lang["lervag/vimtex"] = {
-	lazy = false,
+	lazy = true,
+	ft = { "tex", "bib" },
 	config = require("configs.lang.vimtex"),
 }
 
@@ -15,6 +16,7 @@ lang["gentoo/gentoo-syntax"] = {
 }
 
 lang["artoj/qmake-syntax-vim"] = {
+	lazy = true,
 	ft = { "qmake" },
 }
 
